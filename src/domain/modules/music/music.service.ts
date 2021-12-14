@@ -37,12 +37,12 @@ export class MusicService {
       }),
     );
 
-    let userAux;
+    let musicAux: IMusic;
 
     if (music)
-      userAux.file = await this.fileRepository.findByKey('ownerId', music.id);
+      musicAux.file = await this.fileRepository.findByKey('ownerId', music.id);
 
-    Object.assign(music, userAux);
+    Object.assign(music, musicAux);
 
     return music;
   }

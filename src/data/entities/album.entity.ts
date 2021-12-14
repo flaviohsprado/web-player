@@ -17,9 +17,13 @@ export class Album {
   @Column()
   genre: string;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   numberOfSongs: number;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   duration: string;
 }

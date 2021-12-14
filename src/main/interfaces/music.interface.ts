@@ -15,5 +15,7 @@ export interface IMusic {
   favouriteCount: number;
   lastPlayed: Date;
   playlistId: string;
+  albumId: string;
   file?: IFile;
+  albumCover?: IFile;
 }
