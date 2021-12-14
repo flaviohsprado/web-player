@@ -57,4 +57,6 @@ export class Music {
     nullable: true,
   })
   public playlistId: string;
+
+  public albumId: string;
 }

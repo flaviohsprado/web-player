@@ -1,0 +1,1 @@
+{"version":3,"file":"album.provider.js","sourceRoot":"","sources":["../../../../src/domain/modules/album/album.provider.ts"],"names":[],"mappings":";;;AACA,sEAA4D;AAE/C,QAAA,cAAc,GAAG;IAC5B;QACE,OAAO,EAAE,kBAAkB;QAC3B,UAAU,EAAE,CAAC,UAAsB,EAAE,EAAE,CAAC,UAAU,CAAC,aAAa,CAAC,oBAAK,CAAC;QACvE,MAAM,EAAE,CAAC,qBAAqB,CAAC;KAChC;CACF,CAAC"}

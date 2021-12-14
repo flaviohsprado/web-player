@@ -1,16 +1,16 @@
 import { uuid } from 'uuidv4';
 import CryptographyService from '../../../../infra/criptography.service';
-//import { IsEmail, IsMobilePhone, IsNotEmpty } from 'class-validator';
+import { IsEmail, IsMobilePhone, IsNotEmpty } from 'class-validator';
 import { File } from '../../../../data/entities/file.entity';
 
 export class UserDTO {
   id: string;
   username: string;
 
-  //@IsNotEmpty()
+  @IsNotEmpty()
   password: string;
 
-  //@IsEmail()
+  @IsEmail()
   email: string;
 
   firstName?: string;
@@ -19,7 +19,7 @@ export class UserDTO {
 
   dateOfBirth?: string;
 
-  //@IsMobilePhone('pt-BR')
+  @IsMobilePhone('pt-BR')
   phoneNumber?: string;
 
   address?: string;

@@ -36,10 +36,10 @@ let MusicService = class MusicService {
         const music = new music_dto_1.MusicDTO(await this.musicRepository.findOne({
             where: { [key]: value },
         }));
-        let userAux;
+        let musicAux;
         if (music)
-            userAux.file = await this.fileRepository.findByKey('ownerId', music.id);
-        Object.assign(music, userAux);
+            musicAux.file = await this.fileRepository.findByKey('ownerId', music.id);
+        Object.assign(music, musicAux);
         return music;
     }
     async create(music, files) {

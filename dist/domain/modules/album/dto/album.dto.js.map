@@ -1,0 +1,1 @@
+{"version":3,"file":"album.dto.js","sourceRoot":"","sources":["../../../../../src/domain/modules/album/dto/album.dto.ts"],"names":[],"mappings":";;;AACA,mCAA8B;AAE9B,MAAa,QAAQ;IAUnB,YAAY,KAAe,EAAE,EAAW;QACtC,MAAM,CAAC,MAAM,CAAC,IAAI,EAAE,KAAK,CAAC,CAAC;QAE3B,IAAI,CAAC,EAAE;YAAE,IAAI,CAAC,EAAE,GAAG,IAAA,aAAI,GAAE,CAAC;IAC5B,CAAC;CACF;AAfD,4BAeC"}

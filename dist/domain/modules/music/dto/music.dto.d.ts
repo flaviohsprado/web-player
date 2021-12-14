@@ -14,6 +14,7 @@ export declare class MusicDTO {
     favouriteCount: number;
     lastPlayed: Date;
     playlistId: string;
+    albumId: string;
     file?: IFile;
     constructor(props: MusicDTO, id?: string);
 }

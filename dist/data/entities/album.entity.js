@@ -34,11 +34,15 @@ __decorate([
     __metadata("design:type", String)
 ], Album.prototype, "genre", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({
+        nullable: true,
+    }),
     __metadata("design:type", Number)
 ], Album.prototype, "numberOfSongs", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({
+        nullable: true,
+    }),
     __metadata("design:type", String)
 ], Album.prototype, "duration", void 0);
 Album = __decorate([

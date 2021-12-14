@@ -13,4 +13,5 @@ export declare class Music {
     favouriteCount: number;
     lastPlayed: Date;
     playlistId: string;
+    albumId: string;
 }

@@ -14,6 +14,8 @@ const database_module_1 = require("./data/connection/database.module");
 const file_module_1 = require("./domain/modules/file/file.module");
 const auth_middleware_1 = require("./main/middlewares/auth.middleware");
 const music_module_1 = require("./domain/modules/music/music.module");
+const album_module_1 = require("./domain/modules/album/album.module");
+const playlist_module_1 = require("./domain/modules/playlist/playlist.module");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer.apply(auth_middleware_1.AuthMiddleware).forRoutes('private/users');
@@ -21,7 +23,15 @@ let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [database_module_1.DatabaseModule, file_module_1.FileModule, user_module_1.UserModule, auth_module_1.AuthModule, music_module_1.MusicModule],
+        imports: [
+            database_module_1.DatabaseModule,
+            file_module_1.FileModule,
+            user_module_1.UserModule,
+            auth_module_1.AuthModule,
+            album_module_1.AlbumModule,
+            music_module_1.MusicModule,
+            playlist_module_1.PlaylistModule,
+        ],
     })
 ], AppModule);
 exports.AppModule = AppModule;
