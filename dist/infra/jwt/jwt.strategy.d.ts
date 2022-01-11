@@ -4,8 +4,6 @@ export declare class JwtStrategy extends JwtStrategy_base {
     constructor();
     validate(payload: IAuth): Promise<{
         id: string;
-        username: string;
-        email: string;
     }>;
 }
 export {};

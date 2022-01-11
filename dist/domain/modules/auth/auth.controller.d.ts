@@ -4,5 +4,6 @@ export declare class AuthController {
     constructor(authService: AuthService);
     login(credentials: any): Promise<{
         accessToken: string;
+        user: Omit<import("../../../main/interfaces/user.interface").IUser, "password">;
     }>;
 }

@@ -13,11 +13,12 @@ const playlist_service_1 = require("./playlist.service");
 const playlist_provider_1 = require("./playlist.provider");
 const database_module_1 = require("../../../data/connection/database.module");
 const file_module_1 = require("../file/file.module");
+const music_module_1 = require("../music/music.module");
 let PlaylistModule = class PlaylistModule {
 };
 PlaylistModule = __decorate([
     (0, common_1.Module)({
-        imports: [database_module_1.DatabaseModule, file_module_1.FileModule],
+        imports: [database_module_1.DatabaseModule, file_module_1.FileModule, music_module_1.MusicModule],
         controllers: [playlist_controller_1.PlaylistController],
         providers: [...playlist_provider_1.playlistProviders, playlist_service_1.PlaylistService],
         exports: [...playlist_provider_1.playlistProviders, playlist_service_1.PlaylistService],

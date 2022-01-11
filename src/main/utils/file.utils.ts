@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { FileDTO } from '../../domain/modules/file/dto/file.dto';
 import { S3Service } from '../../infra/s3/s3.service';
+import { IFileUpload } from '../interfaces/fileUpload.interface';
 
 @Injectable()
-class FileUpload {
+class FileUpload implements IFileUpload {
   private uploadService: S3Service;
 
   constructor() {

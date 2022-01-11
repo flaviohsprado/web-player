@@ -2,6 +2,7 @@ import { uuid } from 'uuidv4';
 import CryptographyService from '../../../../infra/criptography.service';
 import { IsEmail, IsMobilePhone, IsNotEmpty } from 'class-validator';
 import { File } from '../../../../data/entities/file.entity';
+import { Logger } from '@nestjs/common';
 
 export class UserDTO {
   id: string;
@@ -54,6 +55,7 @@ export class UserDTO {
 
   public async encryptPassword(): Promise<UserDTO> {
     this.password = await CryptographyService.encrypt(this.password);
+
     return this;
   }
 

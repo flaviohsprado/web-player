@@ -8,12 +8,14 @@ import { FileDTO } from '../file/dto/file.dto';
 import { FileService } from '../file/file.service';
 import { IFile } from '../../../main/interfaces/file.interface';
 import StandardError from '../../../main/utils/error.utils';
+import { MusicService } from '../music/music.service';
 
 @Injectable()
 export class PlaylistService {
   constructor(
     @Inject('PLAYLIST_REPOSITORY')
     private playlistRepository: Repository<Playlist>,
+    private musicService: MusicService,
     private fileRepository: FileService,
   ) {}
 
@@ -21,7 +23,7 @@ export class PlaylistService {
     const playlists = await this.playlistRepository.find();
 
     for (const playlist of playlists) {
-      let playlistAux = new PlaylistDTO({ ...playlist });
+      let playlistAux = new PlaylistDTO({ ...playlist }, playlist.id);
       playlistAux.cover = await this.fileRepository.findByKey(
         'ownerId',
         playlist.id,
@@ -34,19 +36,25 @@ export class PlaylistService {
   }
 
   public async findByKey(key: string, value: string): Promise<IPlaylist> {
-    const playlist = new PlaylistDTO(
-      await this.playlistRepository.findOne({
-        where: { [key]: value },
-      }),
-    );
+    let playlist = await this.playlistRepository.findOne({
+      where: { [key]: value },
+    });
+
+    playlist = new PlaylistDTO({ ...playlist }, playlist.id);
 
     let playlistAux: IPlaylist;
 
-    if (playlist)
+    if (playlist) {
       playlistAux.cover = await this.fileRepository.findByKey(
         'ownerId',
         playlist.id,
       );
+
+      playlistAux.musics = await this.musicService.findByKeySeveral(
+        'playlist',
+        playlist.id,
+      );
+    }
 
     Object.assign(playlist, playlistAux);
 
@@ -57,9 +65,12 @@ export class PlaylistService {
     playlist: PlaylistDTO,
     files: FileDTO[],
   ): Promise<IPlaylist> {
-    const filesPaths = await FileUpload.upload(files, playlist.id, 'playlist');
+    let filesPaths: FileDTO[];
 
-    await this.fileRepository.create(filesPaths);
+    if (files) {
+      filesPaths = await FileUpload.upload(files, playlist.id, 'playlist');
+      await this.fileRepository.create(filesPaths);
+    }
 
     return await this.playlistRepository.save(playlist);
   }

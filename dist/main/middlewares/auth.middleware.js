@@ -27,8 +27,6 @@ let AuthMiddleware = class AuthMiddleware {
         const userValidated = this.jwtService.verify(token);
         req.user = {
             id: userValidated.id,
-            username: userValidated.username,
-            email: userValidated.email,
         };
         next();
     }

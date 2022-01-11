@@ -37,8 +37,6 @@ export class AuthMiddleware implements NestMiddleware {
     // @ts-ignore
     req.user = {
       id: userValidated.id,
-      username: userValidated.username,
-      email: userValidated.email,
     };
 
     next();

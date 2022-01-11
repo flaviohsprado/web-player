@@ -10,6 +10,7 @@ export declare class MusicService {
     constructor(musicRepository: Repository<Music>, fileRepository: FileService);
     findAll(): Promise<IMusic[]>;
     findByKey(key: string, value: string): Promise<IMusic>;
+    findByKeySeveral(key: string, value: string): Promise<IMusic[]>;
     create(music: MusicDTO, files: FileDTO[]): Promise<IMusic>;
     update(id: string, music: MusicDTO, files: FileDTO[]): Promise<IMusic>;
     destroy(id: string): Promise<void>;

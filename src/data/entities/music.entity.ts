@@ -12,9 +12,6 @@ export class Music {
   public artist: string;
 
   @Column()
-  public album: string;
-
-  @Column()
   public genre: string;
 
   @Column()
@@ -27,11 +24,6 @@ export class Music {
 
   @Column()
   public duration: string;
-
-  @Column({
-    nullable: true,
-  })
-  public cover: string;
 
   @Column({
     nullable: true,

@@ -42,12 +42,11 @@ export class AuthService {
 
     const payload: IAuth = {
       id: userValidated.id,
-      username: userValidated.username,
-      email: userValidated.email,
     };
 
     return {
       accessToken: this.jwtService.sign(payload),
+      user: userValidated,
     };
   }
 }

@@ -18,33 +18,41 @@ const typeorm_1 = require("typeorm");
 const playlist_dto_1 = require("./dto/playlist.dto");
 const file_utils_1 = require("../../../main/utils/file.utils");
 const file_service_1 = require("../file/file.service");
+const music_service_1 = require("../music/music.service");
 let PlaylistService = class PlaylistService {
-    constructor(playlistRepository, fileRepository) {
+    constructor(playlistRepository, musicService, fileRepository) {
         this.playlistRepository = playlistRepository;
+        this.musicService = musicService;
         this.fileRepository = fileRepository;
     }
     async findAll() {
         const playlists = await this.playlistRepository.find();
         for (const playlist of playlists) {
-            let playlistAux = new playlist_dto_1.PlaylistDTO(Object.assign({}, playlist));
+            let playlistAux = new playlist_dto_1.PlaylistDTO(Object.assign({}, playlist), playlist.id);
             playlistAux.cover = await this.fileRepository.findByKey('ownerId', playlist.id);
             Object.assign(playlist, playlistAux);
         }
         return playlists;
     }
     async findByKey(key, value) {
-        const playlist = new playlist_dto_1.PlaylistDTO(await this.playlistRepository.findOne({
+        let playlist = await this.playlistRepository.findOne({
             where: { [key]: value },
-        }));
+        });
+        playlist = new playlist_dto_1.PlaylistDTO(Object.assign({}, playlist), playlist.id);
         let playlistAux;
-        if (playlist)
+        if (playlist) {
             playlistAux.cover = await this.fileRepository.findByKey('ownerId', playlist.id);
+            playlistAux.musics = await this.musicService.findByKeySeveral('playlist', playlist.id);
+        }
         Object.assign(playlist, playlistAux);
         return playlist;
     }
     async create(playlist, files) {
-        const filesPaths = await file_utils_1.default.upload(files, playlist.id, 'playlist');
-        await this.fileRepository.create(filesPaths);
+        let filesPaths;
+        if (files) {
+            filesPaths = await file_utils_1.default.upload(files, playlist.id, 'playlist');
+            await this.fileRepository.create(filesPaths);
+        }
         return await this.playlistRepository.save(playlist);
     }
     async update(id, playlist, files) {
@@ -71,6 +79,7 @@ PlaylistService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, common_1.Inject)('PLAYLIST_REPOSITORY')),
     __metadata("design:paramtypes", [typeorm_1.Repository,
+        music_service_1.MusicService,
         file_service_1.FileService])
 ], PlaylistService);
 exports.PlaylistService = PlaylistService;

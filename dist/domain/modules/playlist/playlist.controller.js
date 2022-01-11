@@ -56,6 +56,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PlaylistController.prototype, "findById", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)(),
     (0, common_1.UseInterceptors)((0, platform_express_1.FilesInterceptor)('file')),
     __param(0, (0, common_1.UploadedFiles)()),

@@ -42,6 +42,17 @@ let MusicService = class MusicService {
         Object.assign(music, musicAux);
         return music;
     }
+    async findByKeySeveral(key, value) {
+        const musics = await this.musicRepository.find({
+            where: { [key]: value },
+        });
+        for (const music of musics) {
+            let musicAux = new music_dto_1.MusicDTO(Object.assign({}, music), music.id);
+            musicAux.file = await this.fileRepository.findByKey('ownerId', music.id);
+            Object.assign(music, musicAux);
+        }
+        return musics;
+    }
     async create(music, files) {
         const filesPaths = await file_utils_1.default.upload(files, music.id, 'music');
         await this.fileRepository.create(filesPaths);

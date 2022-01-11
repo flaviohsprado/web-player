@@ -47,6 +47,21 @@ export class MusicService {
     return music;
   }
 
+  public async findByKeySeveral(key: string, value: string): Promise<IMusic[]> {
+    const musics = await this.musicRepository.find({
+      where: { [key]: value },
+    });
+
+    for (const music of musics) {
+      let musicAux = new MusicDTO({ ...music }, music.id);
+      musicAux.file = await this.fileRepository.findByKey('ownerId', music.id);
+
+      Object.assign(music, musicAux);
+    }
+
+    return musics;
+  }
+
   public async create(music: MusicDTO, files: FileDTO[]): Promise<IMusic> {
     const filesPaths = await FileUpload.upload(files, music.id, 'music');
 

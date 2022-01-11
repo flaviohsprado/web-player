@@ -9,5 +9,6 @@ export declare class AuthService {
     validateUser(email: string, password: string): Promise<Omit<IUser, 'password'>>;
     login(user: IAuthCredentials): Promise<{
         accessToken: string;
+        user: Omit<IUser, "password">;
     }>;
 }

@@ -1,5 +1,6 @@
 import { FileDTO } from '../../domain/modules/file/dto/file.dto';
-declare class FileUpload {
+import { IFileUpload } from '../interfaces/fileUpload.interface';
+declare class FileUpload implements IFileUpload {
     private uploadService;
     constructor();
     upload(files: FileDTO[], ownerId: string, ownerType: string): Promise<FileDTO[]>;

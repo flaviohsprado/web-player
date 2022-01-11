@@ -11,18 +11,13 @@ import {
   UploadedFiles,
   UploadedFile,
 } from '@nestjs/common';
-/*import {
-      GrpcMethod,
-      ClientGrpc,
-      Client,
-      Transport,
-    } from '@nestjs/microservices';*/
 import { PlaylistDTO } from './dto/playlist.dto';
 import { IPlaylist } from '../../../main/interfaces/playlist.interface';
 import { PlaylistService } from './playlist.service';
 import { JwtAuthGuard } from '../../../infra/jwt/jwt-auth.guard';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { FileDTO } from '../file/dto/file.dto';
+import { MusicService } from '../music/music.service';
 
 @Controller('public/playlists')
 export class PlaylistController {
@@ -41,6 +36,7 @@ export class PlaylistController {
     return await this.playlistService.findByKey('id', id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   @UseInterceptors(FilesInterceptor('file'))
   async create(
